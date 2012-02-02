@@ -81,7 +81,7 @@ function wpcf7_register_post_types() {
 
 /* Upgrading */
 
-add_action( 'init', 'wpcf7_upgrade' );
+add_action( 'admin_init', 'wpcf7_upgrade' );
 
 function wpcf7_upgrade() {
 	$opt = get_option( 'wpcf7' );
@@ -100,11 +100,6 @@ function wpcf7_upgrade() {
 	$opt['version'] = $new_ver;
 
 	update_option( 'wpcf7', $opt );
-
-	if ( is_admin() && isset( $_GET['page'] ) && 'wpcf7' == $_GET['page'] ) {
-		wp_redirect( wpcf7_admin_url() );
-		exit();
-	}
 }
 
 add_action( 'wpcf7_upgrade', 'wpcf7_convert_to_cpt', 10, 2 );
